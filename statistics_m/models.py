@@ -17,3 +17,9 @@ class Statistics(models.Model):
 
     def get_absolute_url(self):
         return reverse('statistics_detail', kwargs={'statistics_pk': self.pk})
+
+
+# class PostWithStatistics(models.Model):
+#     statistics = models.ForeignKey(Statistics, related_name='Statistics', on_delete=models.CASCADE)
+#     title = models.CharField('Заголовок', max_length=200)
+#     text = models.TextField('Текст', max_length=1000)

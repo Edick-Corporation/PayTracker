@@ -5,8 +5,6 @@ from django.contrib.auth.models import User
 from pytils.translit import slugify
 from django.urls import reverse
 
-from statistics_m.models import Statistics
-
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -39,7 +37,3 @@ class Profile(models.Model):
         instance.profile.save()
 
 
-# class PostWithStatistics(models.Model):
-#     statistics = models.ForeignKey(Statistics, related_name='Statistics', on_delete=models.CASCADE)
-#     title = models.CharField('Заголовок', max_length=200)
-#     text = models.TextField('Текст', max_length=1000)
