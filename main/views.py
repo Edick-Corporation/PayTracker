@@ -9,3 +9,5 @@ from main.models import Purchase
 
 class PurchaseList(ListView):
     model = Purchase
+    template_name = 'purchase/list.html'
+

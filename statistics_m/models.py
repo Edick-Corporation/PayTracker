@@ -5,7 +5,7 @@ from main.models import Purchase
 
 
 class Statistics(models.Model):
-    purchase = models.ForeignKey(Purchase, on_delete=models.CASCADE)
+    purchases = models.ForeignKey(Purchase, on_delete=models.CASCADE)
     slug = models.SlugField('Url', max_length=100, unique=True)
 
     class Meta:
