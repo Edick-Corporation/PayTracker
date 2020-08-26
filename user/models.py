@@ -21,8 +21,14 @@ class Profile(models.Model):
         return self.slug
 
     def save(self, *args, **kwargs):
-        self.slug = str(slugify(self.user)) + str(self.pk)
+        self.slug = str(slugify(self.user))
         super(Profile, self).save(*args, **kwargs)
+        # if Profile.objects.filter(slug__in=self.slug):
+        #     self.slug = str(slugify(self.user)) + str(self.pk)
+        #     super(Profile, self).save(*args, **kwargs)
+        # else:
+        #     self.slug = str(slugify(self.user))
+        #     super(Profile, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse('profile_detail', kwargs={'profile_slug': self.slug})
