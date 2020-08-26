@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% if user.is_authenticated %}
+{#            <li class="nav-item">#}
+{#                <a class="nav-link" href="{% url 'profile_view' %}">Профиль</a>#}
+{#            </li>#}
+             <li class="nav-item">
+                <a class="nav-link" href="{% url 'account_logout' %}">Выйти из Аккаунта</a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'account_login' %}" tabindex="-1" aria-disabled="true">Войти</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'account_signup' %}" tabindex="-1" aria-disabled="true">Зарегистрироваться</a>
+            </li>
+        {% endif %}
+{% block content %}
+{% endblock %}
+</body>
+</html>
