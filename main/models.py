@@ -1,28 +1,26 @@
 from django.db import models
 from django.urls import reverse
 from mptt.models import MPTTModel, TreeForeignKey
-
+from pytils.translit import slugify
+from datetime import datetime
 from user.models import Profile
 
 
-class Type(MPTTModel):
-    name = models.CharField('Тип покупки', max_length=100)
+class Type(models.Model):
+    name = models.CharField('Type of Purchase', max_length=100)
     slug = models.SlugField('Url', max_length=110)
-    parent = TreeForeignKey(
-        'self',
-        blank=True,
-        null=True,
-        on_delete=models.CASCADE,
-        related_name='children'
-    )
 
     class Meta:
-        verbose_name = 'Тип'
-        verbose_name_plural = 'Типы'
+        verbose_name = 'Type'
+        verbose_name_plural = 'Types'
         ordering = ['name']
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        self.slug = str(slugify(self.name))
+        super(Type, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse('type_detail', kwargs={'type_slug': self.slug})
@@ -31,13 +29,12 @@ class Type(MPTTModel):
 class Purchase(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     type = models.ForeignKey(Type, related_name='Type', on_delete=models.CASCADE)
-    cost = models.PositiveIntegerField('Стоимость')
-    slug = models.SlugField('Url', max_length=110, unique=True)
-    date = models.DateTimeField('Когда была сделана покупка', auto_now_add=True)
+    cost = models.DecimalField('Cost $', decimal_places=2, max_digits=12)
+    date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        verbose_name = 'Покупка'
-        verbose_name_plural = 'Покупки'
+        verbose_name = 'Purchase'
+        verbose_name_plural = 'Purchases'
         ordering = ['date']
 
     def __str__(self):

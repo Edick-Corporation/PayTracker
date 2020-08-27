@@ -1,26 +1,13 @@
-from django.db.models import Count
-from django.shortcuts import render
-from django.views.generic import ListView
-import matplotlib.pyplot as plt
-# Create your views here.
-# fuck you
-# СЛЫШ ты лучше успокой свой член лады?
-from qsstats import QuerySetStats
+from django.views.generic import View
+
 from main.models import Purchase
+from main.forms import PurchaseAddForm
+from main.utils import PurchaseListAndAddMixin
 
 
-class PurchaseList(ListView):
+class PurchaseListAndAdd(PurchaseListAndAddMixin, View):
+    form = PurchaseAddForm
     model = Purchase
     template_name = 'purchase/list.html'
-
-    def get_queryset(self):
-
-        if self.request.user.is_anonymous:
-            print('is_anonymous:')
-        else:
-            return Purchase.objects.filter(user__purchase=self.request.user.profile.pk)
-
-
-
 
 

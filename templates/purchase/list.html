@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% for p in purchase_list %}
-        <p>{{ p.cost }}, {{ p.type }}</p>
+    {% for p in purchases %}
+        <p>{{ p.cost }}$, {{ p.type }}, {{ p.user }}</p>
     {% endfor %}
+    <h1>Purchase</h1>
+        <form method="POST" class="post-form">{% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save btn btn-default">Save</button>
+        </form>
 {% endblock %}

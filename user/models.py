@@ -8,14 +8,14 @@ from django.urls import reverse
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    first_name = models.CharField('Имя', max_length=50)
-    last_name = models.CharField('Фамилия', max_length=50)
+    first_name = models.CharField('First Name', max_length=50)
+    last_name = models.CharField('Last Name', max_length=50)
     slug = models.SlugField('Url', unique=True, max_length=60)
-    created_date = models.DateTimeField('Дата создания профиля', auto_now_add=True)
+    created_date = models.DateTimeField('Created date', auto_now_add=True)
 
     class Meta:
-        verbose_name = 'Профиль'
-        verbose_name_plural = 'Профили'
+        verbose_name = 'Profile'
+        verbose_name_plural = 'Profiles'
 
     def __str__(self):
         return self.slug

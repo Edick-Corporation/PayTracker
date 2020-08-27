@@ -9,8 +9,8 @@ class Statistics(models.Model):
     slug = models.SlugField('Url', max_length=100, unique=True)
 
     class Meta:
-        verbose_name = 'Статистика'
-        verbose_name_plural = 'Статистки'
+        verbose_name = 'Statistics'
+        verbose_name_plural = 'Statistics'
 
     def __str__(self):
         return str(self.pk)
