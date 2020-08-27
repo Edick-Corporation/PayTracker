@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
+from main.services import get_users_purchases, get_users_purchases_by_type
 
 
 class PurchaseListAndAddMixin:
     """Миксин для отображения списка покупок и формы для их записи"""
     form = None
-    model = None
     template_name = None
+    queryset = None
 
     def get(self, request):
         """Получаем список покупок и форму"""
@@ -15,8 +16,7 @@ class PurchaseListAndAddMixin:
             return redirect('account_login')
         else:
             form = self.form
-            purchase_list = self.model.objects.filter(user=request.user.profile.pk)
-            return render(request, self.template_name, {'form': form, 'purchases': purchase_list})
+            return render(request, self.template_name, {'form': form, 'purchases': self.queryset})
 
     def post(self, request):
         """ПОСТ запрос для записи покупки в БД"""

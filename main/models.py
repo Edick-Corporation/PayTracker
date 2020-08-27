@@ -20,7 +20,7 @@ class Type(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        self.slug = str(slugify(self.name))
+        self.slug = str(self.name)
         super(Type, self).save(*args, **kwargs)
 
     def get_absolute_url(self):

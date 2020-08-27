@@ -9,4 +9,9 @@
             {{ form.as_p }}
             <button type="submit" class="save btn btn-default">Save</button>
         </form>
+        <a href="{% url 'type_list' %}">Types</a>
+{#    {% for p in purchase_list %}#}
+{#        <p>{{ p.cost }}$, {{ p.type }}, {{ p.user }}</p>#}
+{#    {% endfor %}#}
+{#    <a href="{% url 'type_list' %}">Types</a>#}
 {% endblock %}

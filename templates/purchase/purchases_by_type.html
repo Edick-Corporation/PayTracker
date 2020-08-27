@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for p in purchases_by_type %}
+        <h2>{{ p.type }}</h2>
+       <p>{{ p.cost }}$, {{ p.type }}, {{ p.user }}</p>
+    {% endfor %}
+{% endblock %}
