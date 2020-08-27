@@ -5,6 +5,7 @@ from main.models import Purchase
 
 
 class Statistics(models.Model):
+    """Модель связанная с Покупками для создания статистики"""
     purchases = models.ForeignKey(Purchase, on_delete=models.CASCADE)
     slug = models.SlugField('Url', max_length=100, unique=True)
 

@@ -7,6 +7,7 @@ from django.urls import reverse
 
 
 class Profile(models.Model):
+    """Профиль автоматически создается, после регистрации Юзера"""
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField('First Name', max_length=50)
     last_name = models.CharField('Last Name', max_length=50)
@@ -21,25 +22,22 @@ class Profile(models.Model):
         return self.slug
 
     def save(self, *args, **kwargs):
+        """Автоматическое создание слага для профиля"""
         self.slug = str(slugify(self.user))
         super(Profile, self).save(*args, **kwargs)
-        # if Profile.objects.filter(slug__in=self.slug):
-        #     self.slug = str(slugify(self.user)) + str(self.pk)
-        #     super(Profile, self).save(*args, **kwargs)
-        # else:
-        #     self.slug = str(slugify(self.user))
-        #     super(Profile, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse('profile_detail', kwargs={'profile_slug': self.slug})
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
+        """Если Юзер создан, то создается Профиль и завязывается на Юзере"""
         if created:
             Profile.objects.create(user=instance)
 
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
+        """Сохранение Профиля"""
         instance.profile.save()
 
 

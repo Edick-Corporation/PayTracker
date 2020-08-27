@@ -6,6 +6,8 @@ from main.utils import PurchaseListAndAddMixin
 
 
 class PurchaseListAndAdd(PurchaseListAndAddMixin, View):
+    """Представление для формы и модели в одном шаблоне"""
+
     form = PurchaseAddForm
     model = Purchase
     template_name = 'purchase/list.html'
