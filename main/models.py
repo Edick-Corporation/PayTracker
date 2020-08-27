@@ -32,7 +32,7 @@ class Purchase(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     type = models.ForeignKey(Type, related_name='Type', on_delete=models.CASCADE)
     cost = models.DecimalField('Cost $', decimal_places=2, max_digits=12)
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateTimeField('Created Date', auto_now_add=True)
 
     class Meta:
         verbose_name = 'Purchase'

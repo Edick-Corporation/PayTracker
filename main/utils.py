@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
-from main.services import get_users_purchases, get_users_purchases_by_type
+from services.main_logic import get_users_purchases, get_users_purchases_by_type
 
 
 class PurchaseListAndAddMixin:
