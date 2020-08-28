@@ -1,7 +1,6 @@
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
-from pytils.translit import slugify
 from user.models import Profile
 
 
