@@ -1,8 +1,8 @@
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 from mptt.models import MPTTModel, TreeForeignKey
 from pytils.translit import slugify
-from datetime import datetime
 from user.models import Profile
 
 
@@ -32,7 +32,7 @@ class Purchase(models.Model):
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     type = models.ForeignKey(Type, related_name='Type', on_delete=models.CASCADE)
     cost = models.DecimalField('Cost $', decimal_places=2, max_digits=12)
-    date = models.DateTimeField('Created Date', auto_now_add=True)
+    date = models.DateField('Created Date', default=timezone.now())
 
     class Meta:
         verbose_name = 'Purchase'

@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
+    'django_filters'
 ]
 SITE_ID = 4
 LOGIN_REDIRECT_URL = 'purchase_list'
@@ -168,7 +169,7 @@ USE_L10N = False
 USE_TZ = True
 
 
-DATETIME_FORMAT = 'd.m.y H:i'
+DATETIME_FORMAT = 'm/d/y'
 
 
 # Static files (CSS, JavaScript, Images)

@@ -4,7 +4,7 @@ from main.models import Type, Purchase
 
 
 class PurchaseAdmin(admin.ModelAdmin):
-    list_display = ['user', 'cost', 'type', 'pk']
+    list_display = ['user', 'cost', 'type', 'date','pk']
     list_editable = ['cost', 'type']
     list_filter = ['type']
 

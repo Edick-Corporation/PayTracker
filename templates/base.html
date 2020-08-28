@@ -1,10 +1,27 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <script>
+        $( function() {
+            $( "#datepicker" ).datepicker();
+        } );
+    </script>
 </head>
 <body>
+<a href="{% url 'type_list' %}">Types</a>
+<a href="{% url 'purchase_list' %}">Purchases</a>
+<a href="{% url 'statistics' %}">Statistics</a>
 {% if user.is_authenticated %}
 {#            <li class="nav-item">#}
 {#                <a class="nav-link" href="{% url 'profile_view' %}">Профиль</a>#}
@@ -21,7 +38,11 @@
                 <a class="nav-link" href="{% url 'account_signup' %}" tabindex="-1" aria-disabled="true">Зарегистрироваться</a>
             </li>
         {% endif %}
-{% block content %}
-{% endblock %}
+
+{#<div id="content">#}
+    {% block content %}
+    {% endblock %}
+{#</div>#}
+
 </body>
 </html>

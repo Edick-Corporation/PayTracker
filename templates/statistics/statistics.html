@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
     <form method="GET" action=".">
         <div class="form-group col-md-2 col-lg-2">
             <label for="publishDateMin">Publish date minimum</label>
@@ -13,7 +14,12 @@
         <button type="submit" class="btn btn-primary">Search</button>
     </form>
 
-    {% for p in purchase_list %}
-        <p>{{ p.cost }}$, {{ p.type }}, {{ p.user }}</p>
+    {% for s in statistics %}
+       <p>{{ s.cost }}$, {{ s.type }}, {{ s.user }}, {{ s.date }}</p>
     {% endfor %}
+    <h1>Purchase</h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
 {% endblock %}

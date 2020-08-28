@@ -1,16 +1,14 @@
+from django.shortcuts import render
 from django.views.generic import View, ListView
 
-from main.forms import PurchaseAddForm
-from main.utils import PurchaseListAndAddMixin
-from services.main_logic import get_users_purchases, get_users_purchases_by_type, get_type_list
+from services.main_logic import get_users_purchases_by_type, get_type_list, filtering_by_date
 
 
-class PurchaseListAndAdd(PurchaseListAndAddMixin, View):
-    """Отображение формы и Покупок в одном шаблоне"""
-
-    form = PurchaseAddForm
-    queryset = get_users_purchases
+class PurchaseList(ListView):
+    """Отображение Покупок и Фильтра"""
+    queryset = filtering_by_date
     template_name = 'purchase/list.html'
+    context_object_name = 'purchase_list'
 
 
 class TypeList(ListView):
