@@ -1,32 +1,21 @@
 from django.shortcuts import render, redirect
 
+from services.main_logic import get_form_to_record_purchase, add_purchase, user_is_anonymous
+
 
 class PurchaseListAndAddMixin:
     """Миксин для отображения списка покупок, формы для их записи и фильтра по дате"""
     form = None
-    template_name = None
     queryset = None
-    filter = None
+    template_name = None
 
     def get(self, request):
-        """Получаем список покупок и форму"""
-        if request.user.is_anonymous:
-            print('anonymous')
+        """Получаем Форму и Покупки"""
+        try:
+            return user_is_anonymous(obj=render(request, self.template_name, {'form': self.form, 'statistics': self.queryset}))
+        except AttributeError:
             return redirect('account_login')
-        else:
-            form = self.form
-            return render(request, self.template_name, {'form': form, 'statistics': self.queryset})
 
     def post(self, request):
         """ПОСТ запрос для записи покупки в БД"""
-        if request.user.is_anonymous:
-            print('anonymous')
-            return redirect('purchase_list')
-        else:
-            if request.method == 'POST':
-                form = self.form(request.POST)
-                if form.is_valid():
-                    purchase = form.save(commit=False)
-                    purchase.user = request.user.profile
-                    purchase.save()
-                    return redirect('purchase_list')
+        return add_purchase(self, request)

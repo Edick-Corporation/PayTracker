@@ -42,13 +42,14 @@ INSTALLED_APPS = [
     'main',
     'statistics_m',
     'user',
+    'statistics_m.templatetags',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
 ]
 SITE_ID = 4
-LOGIN_REDIRECT_URL = 'purchase_list'
+LOGIN_REDIRECT_URL = 'statistics'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_USERNAME_REQURIED = True

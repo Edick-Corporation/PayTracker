@@ -11,12 +11,18 @@
             <label for="publishDateMax">Publish date maximum</label>
             <input type="date" class="form-control" id="publishDateMax" name="date_max">
         </div>
+
         <button type="submit" class="btn btn-primary">Search</button>
     </form>
+    <hr>
 
     {% for s in statistics %}
+
        <p>{{ s.cost }}$, {{ s.type }}, {{ s.user }}, {{ s.date }}</p>
+
     {% endfor %}
+    <hr>
+
     <h1>Purchase</h1>
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}

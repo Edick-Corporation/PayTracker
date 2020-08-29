@@ -6,6 +6,7 @@ from user.models import Profile
 
 class Type(models.Model):
     """Тип покупки"""
+
     name = models.CharField('Type of Purchase', max_length=100)
     slug = models.SlugField('Url', max_length=110)
 
@@ -27,10 +28,11 @@ class Type(models.Model):
 
 class Purchase(models.Model):
     """Покупки"""
+
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     type = models.ForeignKey(Type, related_name='Type', on_delete=models.CASCADE)
     cost = models.DecimalField('Cost $', decimal_places=2, max_digits=12)
-    date = models.DateField('Created Date', default=timezone.now())
+    date = models.DateTimeField('Created Date', default=timezone.now())
 
     class Meta:
         verbose_name = 'Purchase'
