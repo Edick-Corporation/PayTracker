@@ -12,7 +12,7 @@ class PurchaseListAndAddMixin:
     def get(self, request):
         """Получаем Форму и Покупки"""
         try:
-            return user_is_anonymous(obj=render(request, self.template_name, {'form': self.form, 'statistics': self.queryset}))
+            return render(request, self.template_name, {'form': self.form, 'statistics': self.queryset})
         except AttributeError:
             return redirect('account_login')
 
