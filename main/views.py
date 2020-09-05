@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View, ListView
 
-from services.main_logic import get_users_purchases_by_type, get_type_list, filter_statistics_by_date_and_types, \
+from services.main_logic import get_type_list, filter_statistics_by_date_and_types, \
     user_is_anonymous
 
 

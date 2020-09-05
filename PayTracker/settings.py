@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
-    'django_filters'
 ]
 SITE_ID = 4
 LOGIN_REDIRECT_URL = 'statistics'

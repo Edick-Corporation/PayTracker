@@ -19,12 +19,6 @@ def _get_users_purchases(self):
     return Purchase.objects.filter(user=self.request.user.profile.pk)
 
 
-def get_users_purchases_by_type(self):
-    """Сервис для фильтрации Покупок по Типам"""
-
-    return _get_users_purchases(self).filter(type__slug=self.kwargs['type_slug'])
-
-
 def get_type_list():
     """Сервис для получения всех Типов"""
 
