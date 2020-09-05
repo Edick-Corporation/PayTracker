@@ -12,16 +12,47 @@
             <input type="date" class="form-control" id="publishDateMax" name="date_max">
         </div>
 
+        <div class="form-group col-md-4">
+            <label for="type">Type</label>
+            <select id="type" class="form-control" name="type">
+              <option selected>All</option>
+              {% for type in types %}
+                <option value="{{ type.slug }}">{{ type }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
         <button type="submit" class="btn btn-primary">Search</button>
     </form>
     <hr>
+    <form method="GET">
+        <button type="submit" class="btn btn-primary" name="today" value="today">today</button>
+    </form>
+    <form method="GET">
+        <button type="submit" class="btn btn-primary" name="week" value="week">week</button>
+    </form>
+    <form method="GET">
+        <button type="submit" class="btn btn-primary" name="month" value="month">month</button>
+    </form>
+    <form method="GET">
+        <button type="submit" class="btn btn-primary" name="year" value="year">year</button>
+    </form>
 
-    {% for s in statistics %}
 
-       <p>{{ s.cost }}$, {{ s.type }}, {{ s.user }}, {{ s.date }}</p>
-
+{#    <form method="GET">#}
+{#        <button type="submit" class="btn btn-primary">Week</button>#}
+{#        <form method="GET">#}
+{#            {{ form.as_p }}#}
+{#        </form>#}
+{#    </form>#}
+{#    {% for statics in pur %}#}
+{#            <p>{{ statics.cost }}$, {{ statics.type }}, {{ statics.user }}, {{ statics.date }}</p>#}
+{#    {% endfor %}#}
+    {% for obj in statistics %}
+       <p>{{ obj.cost }}$, {{ obj.type }}, {{ obj.user }}, {{ obj.date }}</p>
     {% endfor %}
     <hr>
+
 
     <h1>Purchase</h1>
     <form method="POST" class="post-form">{% csrf_token %}

@@ -1,7 +1,8 @@
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect
 import datetime
 
-from statistics_m.forms import PurchaseAddForm, PurchaseForWeek
+from statistics_m.forms import PurchaseAddForm
 from main.models import Purchase, Type
 
 
@@ -13,7 +14,7 @@ def user_is_anonymous(obj):
         return redirect('account_login')
 
 
-def get_users_purchases(self):
+def _get_users_purchases(self):
     """Севрис для фильтрации Покупок по Юзерам"""
     return Purchase.objects.filter(user=self.request.user.profile.pk)
 
@@ -21,7 +22,7 @@ def get_users_purchases(self):
 def get_users_purchases_by_type(self):
     """Сервис для фильтрации Покупок по Типам"""
 
-    return get_users_purchases(self).filter(type__slug=self.kwargs['type_slug'])
+    return _get_users_purchases(self).filter(type__slug=self.kwargs['type_slug'])
 
 
 def get_type_list():
@@ -36,10 +37,27 @@ def _is_valid(value):
     return value != '' and value is not None
 
 
-def shopping_filter_calendar(self):
-    """Сервис календарь для фильтрации Покупок по дате"""
+def filter_statistics_by_date_and_types(self):
+    """Сервис календарь для фильтрации Покупок по дате и Типу"""
 
-    qs = get_users_purchases(self)
+    date = datetime.date.today()
+    start_week = date - datetime.timedelta(date.weekday())
+    end_week = start_week + datetime.timedelta(7)
+
+    value_month = date.month
+    value_year = date.year
+    value_today = date.day
+
+    qs = _get_users_purchases(self)
+    types = get_type_list()
+
+    type = self.request.GET.get('type')
+
+    week = self.request.GET.get('week')
+    month = self.request.GET.get('month')
+    year = self.request.GET.get('year')
+    today = self.request.GET.get('today')
+
     date_min = self.request.GET.get('date_min')
     date_max = self.request.GET.get('date_max')
 
@@ -49,23 +67,22 @@ def shopping_filter_calendar(self):
     if _is_valid(date_max):
         qs = qs.filter(date__lt=date_max)
 
+    if _is_valid(type) and type != 'All':
+        qs = qs.filter(type__slug=type)
+
+    if _is_valid(today):
+        qs = qs.filter(date__day=value_today)
+
+    if _is_valid(week):
+        qs = qs.filter(date__range=[start_week, end_week])
+
+    if _is_valid(month):
+        qs = qs.filter(date__month=value_month)
+
+    if _is_valid(year):
+        qs = qs.filter(date__year=value_year)
+
     return qs
-
-
-# def get_purchase_for_week(self):
-#     qs = get_users_purchases(self.request)
-#     date = datetime.date.today()
-#     start_week = date - datetime.timedelta(date.weekday())
-#     end_week = start_week + datetime.timedelta(7)
-#     form = PurchaseForWeek()
-#
-#     if form.is_valid():
-#         form = form.save()
-#         form.add(
-#             start_week=form['start_of_week'],
-#             end_week=form['end_of_week']
-#          )
-#     return redirect('statistics')
 
 
 def get_form_to_record_purchase():
@@ -79,7 +96,7 @@ def add_purchase(self, request):
     """Сервис для ПОСТ запроса с Формы"""
 
     if self.request.method == 'POST':
-        form = self.form(request.POST)
+        form = PurchaseAddForm(request.POST)
         if form.is_valid():
             purchase = form.save(commit=False)
             purchase.user = request.user.profile

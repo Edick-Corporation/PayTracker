@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for profile in profile_list %}
+        <h2><a href="{{ profile.get_absolute_url }}">{{ profile.user }}</a></h2>
+    {% endfor %}
+{% endblock %}

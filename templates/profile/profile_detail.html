@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% for profile in my_profile %}
-        <h2>{{ profile.user }} Id</h2>
+    {% for profile in profile_detail %}
+        <h2>{{ profile.user }}</h2>
         <h2>{{ profile.first_name }}, {{ profile.last_name }}</h2>
     {% endfor %}
 {% endblock %}

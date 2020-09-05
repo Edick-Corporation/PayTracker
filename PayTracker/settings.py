@@ -42,11 +42,11 @@ INSTALLED_APPS = [
     'main',
     'statistics_m',
     'user',
-    'statistics_m.templatetags',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
+    'django_filters'
 ]
 SITE_ID = 4
 LOGIN_REDIRECT_URL = 'statistics'
