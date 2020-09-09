@@ -40,7 +40,6 @@ def filter_statistics_by_date_and_types(self):
 
     value_month = date.month
     value_year = date.year
-    value_today = date.day
 
     qs = _get_users_purchases(self)
     types = get_type_list()
@@ -50,7 +49,6 @@ def filter_statistics_by_date_and_types(self):
     week = self.request.GET.get('week')
     month = self.request.GET.get('month')
     year = self.request.GET.get('year')
-    today = self.request.GET.get('today')
 
     date_min = self.request.GET.get('date_min')
     date_max = self.request.GET.get('date_max')
@@ -63,9 +61,6 @@ def filter_statistics_by_date_and_types(self):
 
     if _is_valid(type) and type != 'All':
         qs = qs.filter(type__slug=type)
-
-    if _is_valid(today):
-        qs = qs.filter(date__day=value_today)
 
     if _is_valid(week):
         qs = qs.filter(date__range=[start_week, end_week])
