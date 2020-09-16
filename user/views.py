@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from django.views.generic import ListView
-from services.profile_logic import get_my_profile, all_profiles, get_profile
+from django.views.generic import ListView, View
+from services.profile_logic import get_my_profile, all_profiles, get_profile, get_form_for_editing_my_profile,\
+    edit_my_profile
 from services.main_logic import user_is_anonymous
+from user.utils import MyProfileEditMixin
 
 
 class MyProfileView(ListView):
@@ -10,6 +12,12 @@ class MyProfileView(ListView):
 
     def get_queryset(self):
         return user_is_anonymous(obj=get_my_profile(self))
+
+
+class MyProfileEdit(MyProfileEditMixin, View):
+    queryset = get_form_for_editing_my_profile
+    form = edit_my_profile
+    template_name = 'profile/edit.html'
 
 
 class ProfilesListView(ListView):

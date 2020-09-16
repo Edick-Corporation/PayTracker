@@ -2,7 +2,10 @@
 
 {% block content %}
     {% for profile in my_profile %}
-        <h2>{{ profile.user }} Id</h2>
-        <h2>{{ profile.first_name }}, {{ profile.last_name }}</h2>
+        <h2>Id: {{ profile.user }}</h2>
+        <h3>{{ profile.first_name }} {{ profile.last_name }}</h3>
+        bio
+        <h6>{{ profile.bio }}</h6>
     {% endfor %}
+    <a href="{% url 'my_profile_edit' %}">Edit</a>
 {% endblock %}

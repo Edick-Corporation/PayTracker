@@ -10,9 +10,11 @@ class Profile(models.Model):
     """Профиль автоматически создается, после регистрации Юзера"""
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    avatar = models.ImageField('Avatar', upload_to='avatars', blank=True, null=True)
     first_name = models.CharField('First Name', max_length=50)
     last_name = models.CharField('Last Name', max_length=50)
     slug = models.SlugField('Url', unique=True, max_length=60)
+    bio = models.TextField('Bio', max_length=200, default='add bio')
     created_date = models.DateTimeField('Created date', auto_now_add=True)
 
     class Meta:
