@@ -7,6 +7,8 @@ from user.utils import MyProfileEditMixin
 
 
 class MyProfileView(ListView):
+    """Отображение своего Профиля"""
+
     template_name = 'profile/my_profile.html'
     context_object_name = 'my_profile'
 
@@ -15,18 +17,24 @@ class MyProfileView(ListView):
 
 
 class MyProfileEdit(MyProfileEditMixin, View):
+    """Редактирование своего Профиля"""
+
     queryset = get_form_for_editing_my_profile
     form = edit_my_profile
     template_name = 'profile/edit.html'
 
 
 class ProfilesListView(ListView):
+    """Список всех пользователей"""
+
     template_name = 'profile/profile_list.html'
     context_object_name = 'profile_list'
     queryset = all_profiles()
 
 
 class ProfileDetailView(ListView):
+    """Отображение одного пользователя"""
+
     template_name = 'profile/profile_detail.html'
     context_object_name = 'profile_detail'
     queryset = get_profile
