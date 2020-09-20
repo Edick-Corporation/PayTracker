@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% for profile in profile_detail %}
-        <h2>Id: {{ profile.user }}</h2>
-        <h3>{{ profile.first_name }} {{ profile.last_name }}</h3>
+   <svg width="250" height="250">
+        <pattern id="pattern" width="100%" height="100%">
+            <image xlink:href="{{ profile_detail.avatar.url }}" width="200" height="200" preserveAspectRatio="xMidYMin slice"></image>
+        </pattern>
+        <circle cx="125" cy="125" r="100" fill="url(#pattern)"></circle>
+    </svg>
+        <h2>Id: {{ profile_detail.user }}</h2>
+        <h3>{{ profile_detail.first_name }} {{ profile_detail.last_name }}</h3>
         bio
-        <h6>{{ profile.bio }}</h6>
-    {% endfor %}
+        <h6>{{ profile_detail.bio }}</h6>
 {% endblock %}

@@ -8,4 +8,4 @@ class ProfileEdit(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ['first_name', 'last_name', 'bio']
+        fields = ['avatar', 'first_name', 'last_name', 'bio']
