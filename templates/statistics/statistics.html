@@ -52,8 +52,16 @@
     </div>
     </form>
     <hr>
+
+
+    <h4>
+        You spend on average per week:{% for obj in average %}
+            {{ obj }}
+        {% endfor %}$
+    </h4>
     {% for obj in statistics %}
        <p>{{ obj.cost }}$, {{ obj.type }}, {{ obj.user }}, {{ obj.date }}</p>
+        {{ obj.count_c }}
     {% endfor %}
     <hr>
 
@@ -63,4 +71,5 @@
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
+
 {% endblock %}

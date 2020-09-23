@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 from user.models import Profile
+from datetime import datetime
 
 
 class Type(models.Model):
@@ -44,3 +45,5 @@ class Purchase(models.Model):
 
     def get_absolute_url(self):
         return reverse('purchase_detail', kwargs={'type_slug': self.type.slug, 'purchase_pk': self.pk})
+
+

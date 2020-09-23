@@ -10,4 +10,4 @@ class PurchaseList(ListView):
 
     template_name = 'purchase/list.html'
     context_object_name = 'purchase_list'
-    queryset = user_is_anonymous(obj=filter_statistics_by_date_and_types)
+    queryset = filter_statistics_by_date_and_types

@@ -8,14 +8,15 @@ class PurchaseListAndAddMixin:
     queryset = None
     types = None
     template_name = None
+    average = None
 
     def get(self, request):
         """Получаем Форму и Покупки"""
         try:
             return render(request, self.template_name, {'form': self.form, 'statistics': self.queryset,
-                                                        'types': self.types})
+                                                        'types': self.types, 'average': self.average})
         except AttributeError:
-            return redirect('account_login')
+            return print('log')
 
     def post(self, request):
         """ПОСТ запрос для записи покупки в БД"""

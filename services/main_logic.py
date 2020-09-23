@@ -14,7 +14,7 @@ def user_is_anonymous(obj):
         return redirect('account_login')
 
 
-def _get_users_purchases(self):
+def get_users_purchases(self):
     """Севрис для фильтрации Покупок по Юзерам"""
     return Purchase.objects.filter(user=self.request.user.profile.pk)
 
@@ -41,7 +41,7 @@ def filter_statistics_by_date_and_types(self):
     value_month = date.month
     value_year = date.year
 
-    qs = _get_users_purchases(self)
+    qs = get_users_purchases(self)
     types = get_type_list()
 
     type = self.request.GET.get('type')
