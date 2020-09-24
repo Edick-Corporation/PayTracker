@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'main',
     'statistics_m',
     'user',
+    'save_money',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',

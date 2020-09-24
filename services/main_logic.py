@@ -44,7 +44,7 @@ def filter_statistics_by_date_and_types(self):
     qs = get_users_purchases(self)
     types = get_type_list()
 
-    type = self.request.GET.get('type')
+    type_of_purchase = self.request.GET.get('type')
 
     week = self.request.GET.get('week')
     month = self.request.GET.get('month')
@@ -58,9 +58,10 @@ def filter_statistics_by_date_and_types(self):
 
     if _is_valid(date_max):
         qs = qs.filter(date__lt=date_max)
+        print(type(date_min), type(date_max))
 
-    if _is_valid(type) and type != 'All':
-        qs = qs.filter(type__slug=type)
+    if _is_valid(type_of_purchase) and type_of_purchase != 'All':
+        qs = qs.filter(type__slug=type_of_purchase)
 
     if _is_valid(week):
         qs = qs.filter(date__range=[start_week, end_week])
