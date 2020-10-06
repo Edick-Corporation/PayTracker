@@ -84,4 +84,4 @@ def get_ready_average(self):
         ready_average = str(_get_dirty_average(self)).split()
         return ready_average
     except ZeroDivisionError:
-        pass
+        return ['0']

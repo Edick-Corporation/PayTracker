@@ -6,7 +6,6 @@ from django.dispatch import receiver
 from django.contrib.auth.models import User
 from pytils.translit import slugify
 from django.urls import reverse
-from PIL import Image, ImageDraw
 
 from PayTracker.settings import BASE_DIR
 
@@ -34,8 +33,6 @@ class Profile(models.Model):
         """Автоматическое создание слага для профиля"""
         self.slug = str(slugify(self.user))
         super(Profile, self).save(*args, **kwargs)
-
-
 
     def get_absolute_url(self):
         return reverse('profile_detail', kwargs={'profile_slug': self.slug})
