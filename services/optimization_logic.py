@@ -89,9 +89,3 @@ def get_ready_average(self):
         return ready_average
     except ZeroDivisionError:
         return ['0']
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> 85c247d60836e55687ed932ef86339e8a838d4d9
