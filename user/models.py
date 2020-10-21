@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from pytils.translit import slugify
 from django.urls import reverse
-from PIL import Image, ImageDraw
 
 from PayTracker.settings import BASE_DIR
 
