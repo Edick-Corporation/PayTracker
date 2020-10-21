@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Save Money Mode</h1>
+    <form method="post" class="multipart/form-data">{% csrf_token %}
+        {{ form_save_money.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+
+{% endblock %}

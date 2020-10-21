@@ -1,5 +1,9 @@
 import datetime
+
+from django.shortcuts import redirect
+
 from services.main_logic import get_users_purchases
+
 
 
 def _get_purchase_date(self):
@@ -84,4 +88,7 @@ def get_ready_average(self):
         ready_average = str(_get_dirty_average(self)).split()
         return ready_average
     except ZeroDivisionError:
-        pass
+        return ['0']
+
+
+

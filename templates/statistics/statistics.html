@@ -52,10 +52,12 @@
     </div>
     </form>
     <hr>
+    <a class="nav-link" href="{% url 'purchase_list' %}">Check all Purchases</a>
 
 
     <h4>
-        You spend on average per week:{% for obj in average %}
+        You spend on average per week:
+        {% for obj in average %}
             {{ obj }}
         {% endfor %}$
     </h4>
@@ -71,5 +73,6 @@
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
+
 
 {% endblock %}

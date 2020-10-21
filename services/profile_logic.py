@@ -25,14 +25,14 @@ def get_profile(self):
 def get_form_for_editing_my_profile(self):
     """Сервис для получения формы для редактирования профиля"""
 
-    profile = Profile.objects.get(slug=self.request.user.profile.slug)
+    profile = Profile.objects.get(id=self.request.user.profile.id)
     return ProfileEdit(instance=profile)
 
 
 def edit_my_profile(self, request):
     """Сервис для редактирования профиля"""
 
-    my_profile = Profile.objects.get(slug=self.request.user.profile.slug)
+    my_profile = Profile.objects.get(id=self.request.user.profile.id)
     form = ProfileEdit(request.POST, request.FILES, instance=my_profile)
 
     if form.is_valid():

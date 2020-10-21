@@ -1,10 +1,10 @@
-from django.shortcuts import render
 from django.views.generic import View
 
 from services.main_logic import get_form_to_record_purchase,  get_type_list, filter_statistics_by_date_and_types, \
     add_purchase
-from statistics_m.utils import PurchaseListAndAddMixin
 from services.optimization_logic import get_ready_average
+
+from statistics_m.utils import PurchaseListAndAddMixin
 
 
 class StatisticsListAndAdd(PurchaseListAndAddMixin, View):

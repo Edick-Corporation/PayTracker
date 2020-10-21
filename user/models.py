@@ -4,6 +4,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
+from django.utils import timezone
 from pytils.translit import slugify
 from django.urls import reverse
 from PIL import Image, ImageDraw
@@ -21,6 +22,7 @@ class Profile(models.Model):
     last_name = models.CharField('Last Name', max_length=50, blank=True)
     slug = models.SlugField('Url', unique=True, max_length=60)
     bio = models.TextField('Bio', max_length=200, default='add bio')
+
     created_date = models.DateTimeField('Created date', auto_now_add=True)
 
     class Meta:
@@ -34,8 +36,6 @@ class Profile(models.Model):
         """Автоматическое создание слага для профиля"""
         self.slug = str(slugify(self.user))
         super(Profile, self).save(*args, **kwargs)
-
-
 
     def get_absolute_url(self):
         return reverse('profile_detail', kwargs={'profile_slug': self.slug})
@@ -52,5 +52,3 @@ class Profile(models.Model):
         """Сохранение Профиля"""
 
         instance.profile.save()
-
-
