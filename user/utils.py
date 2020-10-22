@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 
 
 class MyProfileEditMixin:
@@ -8,7 +9,10 @@ class MyProfileEditMixin:
 
     def get(self, request):
         qs = self.queryset
-        return render(request, self.template_name, {'form': qs})
+        try:
+            return render(request, self.template_name, {'form': qs})
+        except AttributeError:
+            return HttpResponseRedirect('/accounts/login/')
 
     def post(self, request):
         return self.form(request)

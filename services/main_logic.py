@@ -11,17 +11,17 @@ def user_is_anonymous(obj):
     try:
         return obj
     except AttributeError:
-        return redirect('account_login')
+        return HttpResponseRedirect('accounts/login/')
 
 
 def get_users_purchases(self):
     """Севрис для фильтрации Покупок по Юзерам"""
-    return Purchase.objects.filter(user=self.request.user.profile.pk)
+    users_purchases = Purchase.objects.filter(user=self.request.user.profile.pk)
+    return user_is_anonymous(obj=users_purchases)
 
 
 def get_type_list():
     """Сервис для получения всех Типов"""
-
     return Type.objects.all()
 
 

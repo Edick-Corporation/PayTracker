@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from django.http import HttpResponseRedirect
 
 from user.models import Profile
 from user.forms import ProfileEdit
@@ -7,12 +8,11 @@ from user.forms import ProfileEdit
 def get_my_profile(self):
     """Сервис для получении своего профиля"""
 
-    return all_profiles().get(slug=self.request.user.profile.slug)
+    return Profile.objects.get(slug=self.request.user.profile.slug)
 
 
-def all_profiles():
+def all_profiles(self):
     """Сервис для получения всех профилей"""
-
     return Profile.objects.all()
 
 

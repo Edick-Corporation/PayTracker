@@ -1,4 +1,6 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
+from services.main_logic import user_is_anonymous
 
 
 class PurchaseListAndAddMixin:
@@ -15,8 +17,9 @@ class PurchaseListAndAddMixin:
         try:
             return render(request, self.template_name, {'form': self.form, 'statistics': self.queryset,
                                                         'types': self.types, 'average': self.average})
+
         except AttributeError:
-            return print('log')
+            return HttpResponseRedirect('accounts/login/')
 
     def post(self, request):
         """ПОСТ запрос для записи покупки в БД"""
