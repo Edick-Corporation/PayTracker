@@ -2,7 +2,7 @@ import datetime
 
 from django.shortcuts import redirect
 
-from services.main_logic import get_users_purchases
+from services.main_logic import get_users_purchases, get_type_list
 
 
 
@@ -65,6 +65,7 @@ def _count_weeks(self):
     return len(_cost_values_of_purchases(self))
 
 
+
 def _expenses_by_every_week(self):
     """Сервис для получения трат по заданым датам"""
 
@@ -89,3 +90,4 @@ def get_ready_average(self):
         return ready_average
     except ZeroDivisionError:
         return ['0']
+

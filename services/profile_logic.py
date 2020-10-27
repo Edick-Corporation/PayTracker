@@ -11,7 +11,7 @@ def get_my_profile(self):
     return Profile.objects.get(slug=self.request.user.profile.slug)
 
 
-def all_profiles(self):
+def all_profiles():
     """Сервис для получения всех профилей"""
     return Profile.objects.all()
 

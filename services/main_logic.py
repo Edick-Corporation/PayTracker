@@ -92,3 +92,34 @@ def add_purchase(self, request):
             purchase.user = request.user.profile
             purchase.save()
             return redirect('statistics')
+
+
+def clear_users_types(self):
+    user_types = get_users_purchases(self).values_list('type', flat=True)
+    clear_types = list(set(user_types))
+    name_of_types = list(Type.objects.filter(id__in=clear_types).values_list('name', flat=True))
+    return name_of_types
+
+
+def prices(self):
+    dirty_prices = []
+    for t in clear_users_types(self):
+        dirty_prices.append(get_users_purchases(self).filter(type__name=t).values_list('cost', flat=True))
+    clear_prices = []
+    for d_p in dirty_prices:
+        clear_prices.append(list(d_p))
+    return clear_prices
+
+
+def count_prices_per_type(self):
+    list_counted = []
+    for p in prices(self):
+        list_counted.append(sum(p))
+    return list_counted
+
+
+def get_ready_data_of_prices(self):
+    ready_data = []
+    for prices_of_types in count_prices_per_type(self):
+        ready_data.append(float(prices_of_types))
+    return ready_data

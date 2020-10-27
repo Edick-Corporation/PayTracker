@@ -20,3 +20,5 @@ class StatisticsListAndAdd(PurchaseListAndAddMixin, View):
 
 
 
+
+
