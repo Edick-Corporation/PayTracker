@@ -2,7 +2,19 @@
 
 {% block content %}
     <h1>Pie Chart</h1>
- <div id="container" style="width: 75%;">
+     <div class="box">
+        <div><form method="GET" action=".">
+                    <button type="submit" class="btn btn-outline-secondary" name="week" value="week">Week</button>
+                </form></div>
+        <div><form method="GET" action=".">
+                    <button type="submit" class="btn btn-outline-secondary" name="month" value="month">Month</button>
+                </form></div>
+        <div><form method="GET" action=".">
+                    <button type="submit" class="btn btn-outline-secondary" name="year" value="year">Year</button>
+                </form></div>
+    </div>
+
+ <div id="container" style="width: 50%;">
     <canvas id="pie-chart"></canvas>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script><script>
@@ -12,9 +24,9 @@
         datasets: [{
           data: {{ data|safe }},
           backgroundColor: [
-            '#e23838', '#6363e2', '#ff0080', '#28e0e0', '#5c26ff'
+            '#e23838', '#6363e2', '#ff0080', '#28e0e0', '#5c26ff', '#6363e2'
           ],
-          label: 'Population'
+          label: 'Types'
         }],
         labels: {{ labels|safe }}
       },

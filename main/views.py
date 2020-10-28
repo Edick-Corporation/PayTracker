@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import View, ListView
 
 from services.main_logic import get_type_list, filter_statistics_by_date_and_types, \
-    user_is_anonymous, clear_users_types, get_ready_data_of_prices
+    user_is_anonymous, get_name_of_types, get_ready_data_of_prices
 
 
 def purchase_list_view(request):
@@ -31,7 +31,7 @@ class PurchaseList(ListView):
 class PieChartV1(View):
     def get(self, request):
 
-        labels = clear_users_types(self)
+        labels = get_name_of_types(self)
         data = get_ready_data_of_prices(self)
         print(data)
         return render(request, 'statistics/pie.html', {

@@ -94,17 +94,52 @@ def add_purchase(self, request):
             return redirect('statistics')
 
 
-def clear_users_types(self):
-    user_types = get_users_purchases(self).values_list('type', flat=True)
+def get_filtered_qs_by_date(self):
+    qs = get_users_purchases(self)
+
+    date = datetime.date.today()
+    start_week = date - datetime.timedelta(date.weekday())
+    end_week = start_week + datetime.timedelta(7)
+
+    value_month = date.month
+    value_year = date.year
+
+    week = self.request.GET.get('week')
+    month = self.request.GET.get('month')
+    year = self.request.GET.get('year')
+    print(week)
+    date_min = self.request.GET.get('date_min')
+    date_max = self.request.GET.get('date_max')
+    if _is_valid(date_min):
+        qs = qs.filter(date__gte=date_min)
+
+    if _is_valid(date_max):
+        qs = qs.filter(date__lt=date_max)
+
+    if _is_valid(week):
+        qs = qs.filter(date__range=[start_week, end_week])
+
+    if _is_valid(month):
+        qs = qs.filter(date__month=value_month)
+
+    if _is_valid(year):
+        qs = qs.filter(date__year=value_year)
+    print(qs)
+    return qs
+
+
+def get_name_of_types(self):
+    user_types = get_filtered_qs_by_date(self).values_list('type', flat=True)
     clear_types = list(set(user_types))
     name_of_types = list(Type.objects.filter(id__in=clear_types).values_list('name', flat=True))
+    print(name_of_types)
     return name_of_types
 
 
 def prices(self):
     dirty_prices = []
-    for t in clear_users_types(self):
-        dirty_prices.append(get_users_purchases(self).filter(type__name=t).values_list('cost', flat=True))
+    for t in get_name_of_types(self):
+        dirty_prices.append(get_filtered_qs_by_date(self).filter(type__name=t).values_list('cost', flat=True))
     clear_prices = []
     for d_p in dirty_prices:
         clear_prices.append(list(d_p))
