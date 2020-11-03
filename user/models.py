@@ -20,7 +20,7 @@ class Profile(models.Model):
     first_name = models.CharField('First Name', max_length=50, blank=True)
     last_name = models.CharField('Last Name', max_length=50, blank=True)
     slug = models.SlugField('Url', unique=True, max_length=60)
-    bio = models.TextField('Bio', max_length=200, default='add bio')
+    bio = models.TextField('Bio', max_length=200, blank=True)
 
     created_date = models.DateTimeField('Created date', auto_now_add=True)
 

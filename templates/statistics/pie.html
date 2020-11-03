@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Pie Chart</h1>
+    <h1>Hello {{ user.username }}!</h1>
      <div class="box">
         <div><form method="GET" action=".">
                     <button type="submit" class="btn btn-outline-secondary" name="week" value="week">Week</button>
@@ -14,7 +14,7 @@
                 </form></div>
     </div>
 
- <div id="container" style="width: 50%;">
+ <div id="container" style="width: 60%;">
     <canvas id="pie-chart"></canvas>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script><script>
@@ -40,4 +40,17 @@
       window.myPie = new Chart(ctx, config);
     };
   </script>
+    <h3>Add Purchase</h3>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+    <hr>
+
+    <h5>Warning! You only see the last 10 purchases.</h5>
+    <h6>if you want to see full statistics <a href="{% url 'statistics' %}">go to</a></h6>
+    {% for p in purchases %}
+        <p>{{ p.cost }}$, {{ p.type }}, {{ p.date }}</p>
+    {% endfor %}
+
 {% endblock %}

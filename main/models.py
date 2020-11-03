@@ -37,7 +37,7 @@ class Purchase(models.Model):
     class Meta:
         verbose_name = 'Purchase'
         verbose_name_plural = 'Purchases'
-        ordering = ['date']
+        ordering = ['-date']
 
     def __str__(self):
         return str(self.type)

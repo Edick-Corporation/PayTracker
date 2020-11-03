@@ -1,58 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
+        <div class="form-group col-md-2 col-lg-2">
+            <form method="GET" action=".">
+                <label for="type">Type</label>
+                <select id="type" class="form-control" name="type">
+                    <option selected>All</option>
+                    {% for type in types %}
+                        <option value="{{ type.slug }}">{{ type }}</option>
+                    {% endfor %}
+                </select>
 
-    <form method="GET" action=".">
-
-        <div class="form-group col-md-4">
-            <label for="type">Type</label>
-            <select id="type" class="form-control" name="type">
-              <option selected>All</option>
-              {% for type in types %}
-                <option value="{{ type.slug }}">{{ type }}</option>
-              {% endfor %}
-            </select>
-          </div>
-
-        <button type="submit" class="btn btn-primary">Search</button>
-
-    </form>
-    <form method="GET" action=".">
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            DATE
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item">
-                <form method="GET" action=".">
-                    <label for="publishDateMin">Publish date minimum</label>
-                    <input type="date" class="form-control" id="publishDateMin" name="date_min">
-
-                    <label for="publishDateMax">Publish date maximum</label>
-                    <input type="date" class="form-control" id="publishDateMax" name="date_max">
-                    <button type="submit" class="btn btn-outline-secondary">Search</button>
-                </form>
-            </a>
-             <a class="dropdown-item">
-                 <form method="GET" action=".">
-                     <button type="submit" class="btn btn-outline-secondary" name="week" value="week">For week</button>
-                 </form>
-             </a>
-            <a class="dropdown-item">
-                 <form method="GET" action=".">
-                    <button type="submit" class="btn btn-outline-secondary" name="month" value="month">For month</button>
-                </form>
-             </a>
-            <a class="dropdown-item">
-                 <form method="GET" action=".">
-                    <button type="submit" class="btn btn-outline-secondary" name="year" value="year">For year</button>
-                </form>
-             </a>
+                <label for="publishDateMin">Publish date minimum</label>
+                <input type="date" class="form-control" id="publishDateMin" name="date_min">
+                <label for="publishDateMax">Publish date maximum</label>
+                <input type="date" class="form-control" id="publishDateMax" name="date_max">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
         </div>
-    </div>
-    </form>
     <hr>
-    <a class="nav-link" href="{% url 'purchase_list' %}">Check all Purchases</a>
 
 
     <h4>
@@ -66,13 +32,6 @@
         {{ obj.count_c }}
     {% endfor %}
     <hr>
-
-
-    <h1>Purchase</h1>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Save</button>
-    </form>
 
 
 {% endblock %}

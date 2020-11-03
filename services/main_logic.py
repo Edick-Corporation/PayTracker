@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 import datetime
 
@@ -42,7 +42,6 @@ def filter_statistics_by_date_and_types(self):
     value_year = date.year
 
     qs = get_users_purchases(self)
-    types = get_type_list()
 
     type_of_purchase = self.request.GET.get('type')
 
@@ -91,7 +90,7 @@ def add_purchase(self, request):
             purchase = form.save(commit=False)
             purchase.user = request.user.profile
             purchase.save()
-            return redirect('statistics')
+            return redirect('pie-chart')
 
 
 def get_filtered_qs_by_date(self):
