@@ -4,11 +4,20 @@ from django.utils import timezone
 from user.models import Profile
 
 
+class Color(models.Model):
+    name = models.CharField('Name', max_length=50, blank=True)
+    number = models.CharField('Number', max_length=50, blank=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Type(models.Model):
     """Тип покупки"""
 
     name = models.CharField('Type of Purchase', max_length=100)
     slug = models.SlugField('Url', max_length=110)
+    color = models.ForeignKey(Color, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Type'
@@ -24,6 +33,9 @@ class Type(models.Model):
 
     def get_absolute_url(self):
         return reverse('type_detail', kwargs={'type_slug': self.slug})
+
+
+
 
 
 class Purchase(models.Model):
