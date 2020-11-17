@@ -12,11 +12,11 @@ class PieChartAndAddMixin:
     template_name = None
 
     def get(self, request):
-        labels = self.labels
-        data = self.data
-        list_of_purchases = self.qs()
-        qs = list_of_purchases[:10]
         try:
+            labels = self.labels
+            data = self.data
+            list_of_purchases = self.qs()
+            qs = list_of_purchases[:10]
             return render(request, self.template_name, {'form': self.form, 'purchases': qs,
                                                         'labels': labels, 'data': data})
 

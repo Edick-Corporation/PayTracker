@@ -1,9 +1,6 @@
 import datetime
 
-from django.shortcuts import redirect
-
-from services.main_logic import get_users_purchases, get_type_list
-
+from services.main_logic import get_users_purchases
 
 
 def _get_purchase_date(self):

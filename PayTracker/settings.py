@@ -20,10 +20,11 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'rewjuh+k$eh#u@+&dnqna$wh!*_8fez18ocogjnngd739^+*la'
-
+# SECRET_KEY = 'rewjuh+k$eh#u@+&dnqna$wh!*_8fez18ocogjnngd739^+*la'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'rewjuh+k$eh#u@+&dnqna$wh!*_8fez18ocogjnngd739^+*la')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = False
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 ALLOWED_HOSTS = []
 
@@ -48,7 +49,7 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount.providers.facebook',
 ]
 SITE_ID = 4
-LOGIN_REDIRECT_URL = 'statistics'
+LOGIN_REDIRECT_URL = 'pie-chart'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_USERNAME_REQURIED = True

@@ -33,43 +33,19 @@ def _is_valid(value):
 
 def filter_statistics_by_date_and_types(self):
     """Сервис календарь для фильтрации Покупок по дате и Типу"""
-
-    date = datetime.date.today()
-    start_week = date - datetime.timedelta(date.weekday())
-    end_week = start_week + datetime.timedelta(7)
-
-    value_month = date.month
-    value_year = date.year
-
     qs = get_users_purchases(self)
-
     type_of_purchase = self.request.GET.get('type')
-
-    week = self.request.GET.get('week')
-    month = self.request.GET.get('month')
-    year = self.request.GET.get('year')
-
     date_min = self.request.GET.get('date_min')
     date_max = self.request.GET.get('date_max')
+
+    if _is_valid(type_of_purchase) and type_of_purchase != 'All':
+        qs = qs.filter(type__slug=type_of_purchase)
 
     if _is_valid(date_min):
         qs = qs.filter(date__gte=date_min)
 
     if _is_valid(date_max):
         qs = qs.filter(date__lt=date_max)
-        print(type(date_min), type(date_max))
-
-    if _is_valid(type_of_purchase) and type_of_purchase != 'All':
-        qs = qs.filter(type__slug=type_of_purchase)
-
-    if _is_valid(week):
-        qs = qs.filter(date__range=[start_week, end_week])
-
-    if _is_valid(month):
-        qs = qs.filter(date__month=value_month)
-
-    if _is_valid(year):
-        qs = qs.filter(date__year=value_year)
 
     return qs
 
@@ -106,14 +82,6 @@ def get_filtered_qs_by_date(self):
     week = self.request.GET.get('week')
     month = self.request.GET.get('month')
     year = self.request.GET.get('year')
-    print(week)
-    date_min = self.request.GET.get('date_min')
-    date_max = self.request.GET.get('date_max')
-    if _is_valid(date_min):
-        qs = qs.filter(date__gte=date_min)
-
-    if _is_valid(date_max):
-        qs = qs.filter(date__lt=date_max)
 
     if _is_valid(week):
         qs = qs.filter(date__range=[start_week, end_week])
@@ -123,7 +91,6 @@ def get_filtered_qs_by_date(self):
 
     if _is_valid(year):
         qs = qs.filter(date__year=value_year)
-    print(qs)
     return qs
 
 
@@ -132,7 +99,10 @@ def get_name_of_types(self):
     clear_types = list(set(user_types))
     name_of_types = list(Type.objects.filter(id__in=clear_types).values_list('name', flat=True))
     print(name_of_types)
-    return name_of_types
+    if name_of_types is None:
+        return ['No recorded purchases']
+    else:
+        return name_of_types
 
 
 def prices(self):
@@ -156,4 +126,8 @@ def get_ready_data_of_prices(self):
     ready_data = []
     for prices_of_types in count_prices_per_type(self):
         ready_data.append(float(prices_of_types))
-    return ready_data
+    print('price', ready_data)
+    if ready_data is []:
+        return [0]
+    else:
+        return ready_data
