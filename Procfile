@@ -1,0 +1,1 @@
+web: gunicorn PayTracker.wsgi -- log-file -
