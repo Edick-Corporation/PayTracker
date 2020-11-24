@@ -1,2 +1,2 @@
 # PayTracker
-Ya
+https://paytrackerboob.herokuapp.com/
