@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'rewjuh+k$eh#u@+&dnqna$wh!*_8fe
 # DEBUG = False
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'paytrackerboob.herokuapp.com']
 
 
 # Application definition
